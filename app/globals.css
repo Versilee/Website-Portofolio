@@ -1,26 +1,116 @@
 @import "tailwindcss";
 
+/* Palet: putih bersih dengan biru muda. Teks memakai biru tua pekat agar mudah dibaca. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+  --bg: #ffffff;
+  --surface: #f4f9ff; /* putih kebiruan */
+  --sky: #e0eeff; /* biru muda sangat lembut */
+  --sky-strong: #c3dcff; /* biru muda */
+  --sky-deep: #93c5fd; /* biru muda untuk tombol utama */
+  --accent: #2563eb; /* biru untuk fokus dan indikator kecil */
+  --ink: #0f2547;
+  --muted: #4f5f7b;
+  --line: #dbe6f6;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-sky: var(--sky);
+  --color-sky-strong: var(--sky-strong);
+  --color-sky-deep: var(--sky-deep);
+  --color-accent: var(--accent);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--sky-strong);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ---- Animasi (semuanya singkat dan halus) ---- */
+
+/* 1. Hero: dua elemen muncul saat halaman dibuka. */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.hero-in {
+  animation: fade-up 0.6s ease-out both;
+  animation-delay: calc(var(--i, 0) * 90ms);
+}
+
+/* 2. Section: muncul lembut saat di-scroll. Kelas .reveal dipasang lewat JS,
+      jadi tanpa JavaScript konten tetap terlihat. */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.55s ease-out,
+    transform 0.55s ease-out;
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* 3. Pergantian tab. */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.panel-in {
+  animation: fade-in 0.35s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-in,
+  .panel-in {
+    animation: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+  }
 }
