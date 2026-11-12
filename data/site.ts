@@ -3,9 +3,9 @@
 // Jika `image` dikosongkan, otomatis tampil blok biru muda sebagai pengganti.
 
 export const site = {
-  name: "Nama Anda",
+  name: "Satrya Ghifari Waradana",
   role: "Siswa SMK Rekayasa Perangkat Lunak",
-  school: "SMK Negeri Contoh",
+  school: "SMK Negeri 4 Malang",
   url: "https://namaanda.vercel.app",
   email: "namaanda@email.com",
   cvUrl: "/cv-nama-anda.pdf", // taruh file PDF di folder /public
@@ -15,9 +15,11 @@ export const site = {
   availability: "Terbuka untuk proyek lepas & PKL",
   description:
     "Portofolio pelajar SMK: proyek website, desain, pengalaman, dan prestasi, lengkap dengan CV yang bisa diunduh.",
-  nav: [
-    { id: "karya", label: "Karya" },
-    { id: "profil", label: "Profil" },
+    nav: [
+    { id: "proyek", label: "Proyek" },
+    { id: "layanan", label: "Layanan" },
+    { id: "tentang", label: "Tentang" },
+    { id: "pengalaman", label: "Pengalaman" },
     { id: "kontak", label: "Kontak" },
   ],
   socials: [
