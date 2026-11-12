@@ -1,17 +1,18 @@
 @import "tailwindcss";
 
-/* Palet: putih bersih dengan biru muda. Teks memakai biru tua pekat agar mudah dibaca. */
+/* Palet: putih seperti kertas, garis dan aksen biru muda. Teks biru tua pekat. */
 :root {
   color-scheme: light;
   --bg: #ffffff;
-  --surface: #f4f9ff; /* putih kebiruan */
-  --sky: #e0eeff; /* biru muda sangat lembut */
-  --sky-strong: #c3dcff; /* biru muda */
-  --sky-deep: #93c5fd; /* biru muda untuk tombol utama */
-  --accent: #2563eb; /* biru untuk fokus dan indikator kecil */
-  --ink: #0f2547;
-  --muted: #4f5f7b;
-  --line: #dbe6f6;
+  --surface: #f5f9ff;
+  --sky: #e8f1ff; /* biru muda lembut */
+  --sky-strong: #cfe2ff; /* biru muda */
+  --sky-deep: #8ebbff; /* biru muda untuk tombol utama */
+  --accent: #1d5fd6; /* biru untuk fokus dan penanda kecil */
+  --ink: #0e2240;
+  --muted: #4e5e78;
+  --line: #d8e4f5;
+  --grid: #e1ecfb; /* garis kotak-kotak */
 }
 
 @theme inline {
@@ -24,8 +25,8 @@
   --color-ink: var(--ink);
   --color-muted: var(--muted);
   --color-line: var(--line);
-  --font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
 }
 
 html {
@@ -49,12 +50,21 @@ body {
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
-  border-radius: 6px;
+  border-radius: 4px;
 }
 
-/* ---- Animasi (semuanya singkat dan halus) ---- */
+/* Kertas kotak-kotak ala buku tulis. Memudar ke bawah agar tidak mengganggu bacaan. */
+.paper {
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 36px 36px;
+  background-position: -1px -1px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 35%, transparent 95%);
+  mask-image: linear-gradient(to bottom, #000 35%, transparent 95%);
+}
 
-/* 1. Hero: dua elemen muncul saat halaman dibuka. */
+/* ---- Animasi (singkat dan halus) ---- */
 @keyframes fade-up {
   from {
     opacity: 0;
@@ -70,8 +80,7 @@ body {
   animation-delay: calc(var(--i, 0) * 90ms);
 }
 
-/* 2. Section: muncul lembut saat di-scroll. Kelas .reveal dipasang lewat JS,
-      jadi tanpa JavaScript konten tetap terlihat. */
+/* Muncul saat di-scroll. Kelas .reveal dipasang lewat JS, tanpa JS konten tetap terlihat. */
 .reveal {
   opacity: 0;
   transform: translateY(12px);
@@ -84,7 +93,7 @@ body {
   transform: none;
 }
 
-/* 3. Pergantian tab. */
+/* Pergantian filter dan pratinjau. */
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -94,7 +103,7 @@ body {
   }
 }
 .panel-in {
-  animation: fade-in 0.35s ease-out both;
+  animation: fade-in 0.3s ease-out both;
 }
 
 @media (prefers-reduced-motion: reduce) {
